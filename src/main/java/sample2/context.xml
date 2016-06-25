@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="banking" class="sample2.BankingService">
+		<!-- logger라는 변수에 fileLogger 또는 db 라는 이름의 객체를 주입 -->
+		<property name="logger" ref="fileLogger"></property>
+	</bean>
+	
+	<bean id="fileLogger" class="sample2.FileLogger"></bean>
+	 
+	<bean id="db" class="sample2.DBLogger"></bean>
+</beans>

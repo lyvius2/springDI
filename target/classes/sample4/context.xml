@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="sms" class="sample4.SmsNotification"></bean>
+	<bean id="file" class="sample2.FileLogger"></bean>
+	
+	<!-- 생성자 함수를 이용한 의존성 주입 -->
+	<bean id="customerService1" class="sample4.CustomService">
+		<!-- contructor매개변수 지정의 순서는 Class측의 설정과 달라도 상관없다. -> Class Type에 맞추어 자동 Mapping -->
+		<constructor-arg name="notification" ref="sms"/>
+		<constructor-arg ref="file" />
+	</bean>
+	
+	<!-- setter 메서드를 이용한 의존성 주입 (일반적으로는 이 방법이 많이 애용된다) -->
+	<bean id="customerService2" class="sample4.CustomService">
+		<property name="notification" ref="sms"/>
+		<property name="logger" ref="file"/>
+	</bean>
+	
+	<!-- 위 setter 메서드를 이용한 방법과 동일한 방식 (Namespace에서 'p'추가) -->
+	<bean id="customerService3" class="sample4.CustomService"
+		p:notification-ref="sms"
+		p:logger-ref="logger"/>
+	
+</beans>
